@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FloodShield</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #1b1c44, #0e153a, #0f0c29);
+      color: white;
+      padding: 0;
+    }
+
+    header {
+      background: #0f0c29;
+      padding: 20px;
+      position: relative;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 22px;
+      letter-spacing: 1px;
+    }
+
+    .top-button {
+      background: #ff4bc1;
+      width: 130px;
+      height: 35px;
+      border-radius: 20px;
+    }
+
+    .menu {
+      font-size: 26px;
+      cursor: pointer;
+      display: none;
+      color: white;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #3ef2d2;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    /* Mobile Menu */
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      background: #1b1c44;
+      position: absolute;
+      top: 70px;
+      left: 0;
+      right: 0;
+      padding: 20px;
+    }
+
+    .mobile-nav a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .hero {
+      padding: 40px 20px;
+      max-width: 800px;
+      margin: auto;
+      text-align: left;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      line-height: 1.2;
+    }
+
+    .hero span {
+      font-weight: bold;
+    }
+
+    .hero p {
+      margin: 20px 0;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #d0d0d0;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin: 25px 0;
+    }
+
+    .btn {
+      padding: 14px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .pink {
+      background-color: #ff4bc1;
+      color: white;
+    }
+
+    .pink:hover {
+      background-color: #e03aa7;
+    }
+
+    .cyan {
+      background-color: #3ef2d2;
+      color: black;
+    }
+
+    .cyan:hover {
+      background-color: #1dd9b6;
+      color: white;
+    }
+
+    .link {
+      color: #a8d0ff;
+      text-decoration: underline;
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+    .container{
+        padding: 20px;
+        color: #d0d0d0;
+    }
+    .container h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+    .container p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+    .container h4{
+        margin-top: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .menu {
+        display: block;
+      }
+
+      nav ul {
+        display: none;
+      }
+
+      .mobile-nav.show {
+        display: flex;
+      }
+
+      .navbar {
+        flex-wrap: wrap;
+      }
+
+      .top-button {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <div class="logo">Team Flood Watch</div>
+      <div class="top-button"></div>
+      <div class="menu" onclick="toggleMenu()">&#9776;</div>
+    </div>
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="#">Home</a>
+      <a href="#">Buy a Station</a>
+      <a href="#">Pro Access</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Welcome To Team Flood Watch</span></h1>
+    <p>Here We struglled Day and Night To Find A solution about The continious Occuring Disaster That our Community Is suffering every year which is flood we </p>
+    <div class="buttons">
+      <a href="#" class="btn pink">View Our Solution</a>
+      <a href="#" class="btn cyan">Contribute</a>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+        
+    <h2>About FloodShield Jigawa</h2>
+    <p>FloodShield Jigawa is a startup building a smart early warning system that uses satelite Imagery, AI, and smart sensors to predict and alert Flood threats in real-time, especially for vulnerable rural communities in Jigawa State and beyond</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+        <h3>Platform Features</h3>
+        <h4>Satelite Data</h4>
+        <p>Detects flood-prone zones from space in real-time </p>
+        <h4>AI-Powered Alerts</h4>
+        <p>Process Rainfall and surface water levels to sends smart alerts </p>
+        <h4>Multi-channel Warning</h4>
+        <p>  Alerts Via SMS, Mobile app, Sound alarms, and web dashboard</p>
+    </div>
+  </section>
+  <section>
+    <div class="container">
+        <h3>Our services</h3>
+        <h4>Flood Sensor Sales</h4>
+        <p>We provide and install affordable flood  detection sensors for individuals, communities  and organizations. </p>
+        <h4> Real-Time Alert Subscritption</h4>
+        <p>We offer SMS, app, and siren alerts to notify communities and individuals of flood threats based on AI predictions </p>
+        <h4>Flood Risk Data & Mapping </h4>
+        <p>We genrate satellite-based risk maps and predictive reports for local government, NGOs, and disastee agencies </p>
+        <h4>Custom Dashboards</h4>
+        <p>We build dashboards for policymakers to view risk levels, sensors data, and flooding history in real time</p>
+        <h4>community Education </h4>
+        <p>We engage local communities with wareness campaign, training on flood preparedness, and safety response</p>
+        <h4> Consulting & Partnership </h4>
+        <p>We partner with state agencies, NGOs and private organisations to deploy customized flood protection solutions</p>
+    </div>
+
+  </section>
+
+  <section>
+    <div class="team">
+        <div class="card">
+            <div class="img"></div>
+            <div class="name"></div>
+        </div>
+        <div class="card">
+            <div class="img"></div>
+            <div class="name"></div>
+        </div>
+        <div class="card">
+            <div class="img"></div>
+            <div class="name"></div>
+        </div>
+    </div>
+  </section>
+
+  <footer>
+    <section>
+        <h2>Contact Us </h2>
+        <form action="" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" placeholder="Enter Your Name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" placeholder="Enter Your Email" name="email" required>
+            <label for="message">Message:</label>
+            <textarea name="message" id="" placeholder="Write your Message here ......." row="5" ></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </section>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const mobileNav = document.getElementById('mobileNav');
+      mobileNav.classList.toggle('show');
+    }
+  </script>
+</body>
+</html>
