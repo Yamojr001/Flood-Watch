@@ -4,349 +4,437 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>FloodShield</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root {
+      --primary-dark: #0f0c29;
+      --secondary-dark: #1b1c44;
+      --accent-pink: #ff4bc1;
+      --accent-cyan: #3ef2d2;
     }
-
+    
     body {
       font-family: 'Inter', sans-serif;
       background: linear-gradient(135deg, #1b1c44, #0e153a, #0f0c29);
       color: white;
-      padding: 0;
     }
-
-    header {
-      background: #0f0c29;
-      padding: 20px;
-      position: relative;
-    }
-
+    
     .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1100px;
-      margin: auto;
+      background: var(--primary-dark);
     }
-
-    .logo {
+    
+    .navbar-brand {
       font-weight: bold;
-      font-size: 22px;
       letter-spacing: 1px;
     }
-
-    .menu {
-      font-size: 26px;
-      cursor: pointer;
-      display: none;
+    
+    .nav-link {
       color: white;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 20px;
-    }
-
-    nav ul li a {
-      color: white;
-      text-decoration: none;
       font-weight: 500;
       transition: color 0.3s ease;
     }
-
-    nav ul li a:hover {
-      color: #3ef2d2;
+    
+    .nav-link:hover {
+      color: var(--accent-cyan);
     }
-
-    .mobile-nav {
-      display: none;
-      flex-direction: column;
-      background: #1b1c44;
-      position: absolute;
-      top: 70px;
-      left: 0;
-      right: 0;
-      padding: 20px;
-      z-index: 10;
-    }
-
-    .mobile-nav a {
-      color: white;
-      text-decoration: none;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .mobile-nav.show {
-      display: flex;
-    }
-
+    
     .hero {
-      padding: 40px 20px;
-      max-width: 800px;
-      margin: auto;
-      text-align: left;
+      padding: 80px 0;
     }
-
+    
     .hero h1 {
       font-size: 3rem;
       line-height: 1.2;
     }
-
+    
     .hero p {
       margin: 20px 0;
-      font-size: 1rem;
-      line-height: 1.6;
       color: #d0d0d0;
     }
-
-    .buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin: 25px 0;
-    }
-
-    .btn {
+    
+    .btn-pink {
+      background-color: var(--accent-pink);
+      color: white;
       padding: 14px 28px;
       border-radius: 30px;
-      text-decoration: none;
       font-weight: bold;
-      font-size: 16px;
-      transition: all 0.3s ease;
-      display: inline-block;
     }
-
-    .pink {
-      background-color: #ff4bc1;
+    
+    .btn-pink:hover {
+      background-color: #e03aa7;
       color: white;
     }
-
-    .pink:hover {
-      background-color: #e03aa7;
-    }
-
-    .cyan {
-      background-color: #3ef2d2;
+    
+    .btn-cyan {
+      background-color: var(--accent-cyan);
       color: black;
+      padding: 14px 28px;
+      border-radius: 30px;
+      font-weight: bold;
     }
-
-    .cyan:hover {
+    
+    .btn-cyan:hover {
       background-color: #1dd9b6;
       color: white;
     }
-
-    .container {
-      padding: 40px 20px;
-      max-width: 1000px;
-      margin: auto;
-      color: #d0d0d0;
+    
+    .section-title {
+      margin-bottom: 40px;
+      position: relative;
     }
-
-    .container h2, .container h3 {
-      font-size: 2rem;
+    
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--accent-cyan);
+    }
+    
+    .feature-card {
+      background: rgba(30, 31, 75, 0.7);
+      border-radius: 10px;
+      padding: 30px;
+      height: 100%;
+      transition: transform 0.3s ease;
+      border: 1px solid rgba(62, 242, 210, 0.1);
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(62, 242, 210, 0.3);
+    }
+    
+    .feature-icon {
+      font-size: 2.5rem;
+      color: var(--accent-cyan);
       margin-bottom: 20px;
     }
-
-    .container h4 {
-      margin-top: 20px;
-      color: #ffffff;
-    }
-
-    .container p {
-      font-size: 1rem;
-      line-height: 1.6;
-    }
-
-    .team {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      padding: 40px 20px;
+    
+    .team-section {
       background-color: #121336;
+      padding: 80px 0;
     }
-
-    .card {
+    
+    .team-card {
       background: #1e1f4b;
       border-radius: 10px;
-      padding: 20px;
-      width: 250px;
+      padding: 30px;
       text-align: center;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
+      margin-bottom: 30px;
     }
-
-    .img {
-      width: 100%;
-      height: 180px;
-      background: #3ef2d2;
-      border-radius: 8px;
-      margin-bottom: 15px;
+    
+    .team-img {
+      width: 150px;
+      height: 150px;
       border-radius: 50%;
+      background: var(--accent-cyan);
+      margin: 0 auto 20px;
+      overflow: hidden;
     }
-
-    .name {
+    
+    .team-name {
       font-weight: bold;
-      font-size: 18px;
+      font-size: 1.2rem;
+      margin-bottom: 5px;
     }
-
+    
     footer {
-      background-color: #0f0c29;
-      padding: 40px 20px;
-      color: white;
+      background-color: var(--primary-dark);
+      padding: 60px 0 30px;
     }
-
-    footer h2 {
-      margin-bottom: 20px;
-      font-size: 1.5rem;
+    
+    .carousel-item {
+      height: 500px;
+      background-size: cover;
+      background-position: center;
     }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      max-width: 500px;
+    
+    .carousel-caption {
+      background: rgba(15, 12, 41, 0.8);
+      padding: 30px;
+      border-radius: 10px;
+      bottom: 100px;
     }
-
-    input, textarea {
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      font-size: 1rem;
-      width: 100%;
+    
+    .carousel-indicators button {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin: 0 5px;
     }
-
-    button {
-      padding: 12px;
-      background: #3ef2d2;
-      border: none;
-      font-size: 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    button:hover {
-      background: #1dd9b6;
-    }
-
+    
     @media (max-width: 768px) {
-      .menu {
-        display: block;
+      .hero h1 {
+        font-size: 2.5rem;
       }
-
-      nav ul {
-        display: none;
+      
+      .carousel-item {
+        height: 400px;
       }
-
-      .navbar {
-        flex-wrap: wrap;
+      
+      .carousel-caption {
+        bottom: 50px;
+        padding: 20px;
       }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="navbar">
-      <div class="logo">Team Flood Watch</div>
-      <div class="menu" onclick="toggleMenu()">&#9776;</div>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Team Flood Watch</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Buy a Station</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Pro Access</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
     </div>
-    <nav class="mobile-nav" id="mobileNav">
-      <a href="#">Home</a>
-      <a href="#">Buy a Station</a>
-      <a href="#">Pro Access</a>
-      <a href="#">Contact</a>
-    </nav>
-  </header>
+  </nav>
 
+  <!-- Hero Carousel -->
+  <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/images/OIP.jpeg')">
+        <div class="carousel-caption text-start">
+          <h2>Advanced Flood Detection</h2>
+          <p>Our cutting-edge technology provides real-time flood monitoring and early warnings to protect your community.</p>
+          <a href="#" class="btn btn-pink">Learn More</a>
+        </div>
+      </div>
+      <div class="carousel-item" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/images/OIP\ \(2\).jpeg');">
+        <div class="carousel-caption">
+          <h2>Community Protection</h2>
+          <p>Join our network of protected communities across Jigawa State and beyond.</p>
+          <a href="#" class="btn btn-cyan">Get Protected</a>
+        </div>
+      </div>
+      <div class="carousel-item" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/images/OIP\ \(4\).jpeg');">
+        <div class="carousel-caption text-end">
+          <h2>AI-Powered Predictions</h2>
+          <p>Our system uses artificial intelligence to predict flood risks before they happen.</p>
+          <a href="#" class="btn btn-pink">View Technology</a>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+
+  <!-- Hero Section -->
   <section class="hero">
-    <h1>Welcome To Team Flood Watch</h1>
-    <p>We worked day and night to find a solution to the continuous flooding disasters affecting our community every year.</p>
-    <div class="buttons">
-      <a href="#" class="btn pink">View Our Solution</a>
-      <a href="#" class="btn cyan">Contribute</a>
-    </div>
-  </section>
-
-  <section>
     <div class="container">
-      <h2>About FloodShield Jigawa</h2>
-      <p>FloodShield Jigawa is a startup building a smart early warning system that uses satellite imagery, AI, and smart sensors to predict and alert flood threats in real time—especially for vulnerable rural communities in Jigawa State and beyond.</p>
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <h3>Platform Features</h3>
-      <h4>Satellite Data</h4>
-      <p>Detects flood-prone zones from space in real time.</p>
-      <h4>AI-Powered Alerts</h4>
-      <p>Processes rainfall and surface water levels to send smart alerts.</p>
-      <h4>Multi-channel Warning</h4>
-      <p>Alerts via SMS, mobile app, sound alarms, and a web dashboard.</p>
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <h3>Our Services</h3>
-      <h4>Flood Sensor Sales</h4>
-      <p>We provide and install affordable flood detection sensors for individuals, communities, and organizations.</p>
-      <h4>Real-Time Alert Subscription</h4>
-      <p>We offer SMS, app, and siren alerts to notify communities and individuals of flood threats based on AI predictions.</p>
-      <h4>Flood Risk Data & Mapping</h4>
-      <p>We generate satellite-based risk maps and predictive reports for local governments, NGOs, and disaster agencies.</p>
-      <h4>Custom Dashboards</h4>
-      <p>We build dashboards for policymakers to view risk levels, sensor data, and flooding history in real time.</p>
-      <h4>Community Education</h4>
-      <p>We engage local communities with awareness campaigns and training on flood preparedness and safety response.</p>
-      <h4>Consulting & Partnership</h4>
-      <p>We partner with state agencies, NGOs, and private organizations to deploy customized flood protection solutions.</p>
-    </div>
-  </section>
-
-  <section>
-    <div class="team">
-      <div class="card">
-        <div class="img"></div>
-        <div class="name">Jamilu Yusuf Musa</div>
-      </div>
-      <div class="card">
-        <div class="img"></div>
-        <div class="name">Usman Iliyasu</div>
-      </div>
-      <div class="card">
-        <div class="img"></div>
-        <div class="name">Ahmad Ukashatu</div>
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <h1>Welcome To Team Flood Watch</h1>
+          <p>We worked day and night to find a solution to the continuous flooding disasters affecting our community every year.</p>
+          <div class="d-flex flex-wrap gap-3 mt-4">
+            <a href="#" class="btn btn-pink">View Our Solution</a>
+            <a href="#" class="btn btn-cyan">Contribute</a>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <img src="assets/images/OIP (3).jpeg" alt="Flood monitoring" class="img-fluid rounded shadow" width="100%" height="auto">
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- About Section -->
+  <section class="py-5">
+    <div class="container">
+      <h2 class="section-title">About FloodShield Jigawa</h2>
+      <div class="row">
+        <div class="col-md-8 mx-auto text-center">
+          <p class="lead">FloodShield Jigawa is a startup building a smart early warning system that uses satellite imagery, AI, and smart sensors to predict and alert flood threats in real time—especially for vulnerable rural communities in Jigawa State and beyond.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-5 bg-dark">
+    <div class="container">
+      <h2 class="section-title text-center">Platform Features</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="bi bi-satellite"></i>
+            </div>
+            <h3>Satellite Data</h3>
+            <p>Detects flood-prone zones from space in real time with our advanced satellite monitoring system.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="bi bi-robot"></i>
+            </div>
+            <h3>AI-Powered Alerts</h3>
+            <p>Processes rainfall and surface water levels to send smart alerts before disaster strikes.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="bi bi-megaphone"></i>
+            </div>
+            <h3>Multi-channel Warning</h3>
+            <p>Alerts via SMS, mobile app, sound alarms, and a web dashboard to ensure no one misses the warning.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="py-5">
+    <div class="container">
+      <h2 class="section-title">Our Services</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="feature-card">
+            <h3>Flood Sensor Sales</h3>
+            <p>We provide and install affordable flood detection sensors for individuals, communities, and organizations.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card">
+            <h3>Real-Time Alert Subscription</h3>
+            <p>We offer SMS, app, and siren alerts to notify communities and individuals of flood threats based on AI predictions.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card">
+            <h3>Flood Risk Data & Mapping</h3>
+            <p>We generate satellite-based risk maps and predictive reports for local governments, NGOs, and disaster agencies.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card">
+            <h3>Custom Dashboards</h3>
+            <p>We build dashboards for policymakers to view risk levels, sensor data, and flooding history in real time.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card">
+            <h3>Community Education</h3>
+            <p>We engage local communities with awareness campaigns and training on flood preparedness and safety response.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card">
+            <h3>Consulting & Partnership</h3>
+            <p>We partner with state agencies, NGOs, and private organizations to deploy customized flood protection solutions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <div class="container">
+      <h2 class="section-title text-center">Our Team</h2>
+      <div class="row justify-content-center">
+        <div class="col-md-4">
+          <div class="team-card">
+            <div class="team-img"></div>
+            <h3 class="team-name">Jamilu Yusuf Musa</h3>
+            <p>Founder & CEO</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="team-card">
+            <div class="team-img"></div>
+            <h3 class="team-name">Usman Iliyasu</h3>
+            <p>Technical Lead</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="team-card">
+            <div class="team-img"></div>
+            <h3 class="team-name">Ahmad Ukashatu</h3>
+            <p>Operations Manager</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
   <footer>
-    <section>
-      <h2>Contact Us</h2>
-      <form action="#" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" placeholder="Enter Your Name" name="name" required>
-        <label for="email">Email:</label>
-        <input type="email" placeholder="Enter Your Email" name="email" required>
-        <label for="message">Message:</label>
-        <textarea name="message" placeholder="Write your message here..." rows="5" required></textarea>
-        <button type="submit">Send</button>
-      </form>
-    </section>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <h2 class="section-title">Contact Us</h2>
+          <form>
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="name" placeholder="Enter Your Name" required>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" placeholder="Enter Your Email" required>
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label">Message</label>
+              <textarea class="form-control" id="message" rows="5" placeholder="Write your message here..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-cyan w-100">Send Message</button>
+          </form>
+        </div>
+        <div class="col-lg-6 mt-5 mt-lg-0">
+          <h2 class="section-title">Our Location</h2>
+          <div class="ratio ratio-16x9">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d39206.002432144705!2d9.337137!3d12.0021794!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDAwJzA3LjgiTiA5wrAyMCcxMy42IkU!5e0!3m2!1sen!2sng!4v1620000000000!5m2!1sen!2sng" allowfullscreen="" loading="lazy"></iframe>
+          </div>
+          <div class="mt-4">
+            <p><i class="bi bi-envelope me-2"></i> info@floodshieldjigawa.com</p>
+            <p><i class="bi bi-telephone me-2"></i> +234 123 456 7890</p>
+            <p><i class="bi bi-geo-alt me-2"></i> 123 Safety Avenue, Dutse, Jigawa State</p>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-5 pt-3 border-top">
+        <p>&copy; 2025 FloodShield Jigawa. All rights reserved.</p>
+      </div>
+    </div>
   </footer>
 
-  <script>
-    function toggleMenu() {
-      const mobileNav = document.getElementById('mobileNav');
-      mobileNav.classList.toggle('show');
-    }
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 </body>
 </html>
